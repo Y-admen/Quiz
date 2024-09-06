@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+    <!-- Sign Up Page -->
+    <div id="signup-page" class="page">
+        <h2>Sign Up</h2>
+        <form id="signup-form">
+            <input type="text" id="first-name" placeholder="First Name" required><br>
+            <input type="text" id="last-name" placeholder="Last Name" required><br>
+            <input type="email" id="signup-email" placeholder="Email" required><br>
+            <input type="password" id="signup-password" placeholder="Password" required><br>
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login-page" class="page" style="display: none;">
+        <h2>Login</h2>
+        <form id="login-form">
+            <input type="email" id="login-email" placeholder="Email" required><br>
+            <input type="password" id="login-password" placeholder="Password" required><br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <!-- Quiz Start Page -->
+    <div id="quiz-start-page" class="page" style="display: none;">
+        <h2>Welcome to the Quiz</h2>
+        <button id="start-quiz-btn">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Page -->
+    <div id="quiz-page" class="page" style="display: none;">
+        <div class="quiz-header">
+            <img id="user-image" src="user-placeholder.png" alt="User Image">
+            <p id="user-name"></p>
+            <button id="logout-btn">Logout</button>
+        </div>
+
+        <div class="quiz-content">
+            <div id="question-container">
+                <p id="question-text">Question 1</p>
+            </div>
+
+            <div class="quiz-buttons">
+                <button id="prev-btn">Previous</button>
+                <button id="next-btn">Next</button>
+                <button id="flag-btn">Flag</button>
+            </div>
+
+            <div class="flagged-questions">
+                <h3>Flagged Questions</h3>
+                <ul id="flagged-list"></ul>
+                <button id="submit-btn">Submit Quiz</button>
+            </div>
+           
+<div id="time-out-page" class="page" style="display: none;">
+    <h2>Sorry, your time is out!</h2>
+    <img src="clock-image.png" alt="Time Out">
+</div>
+
+
+<div id="result-page" class="page" style="display: none;">
+    <h2 id="result-message">Your Score: </h2>
+</div>
+
+        </div>
+    </div>
+
+    <script src="quiz.js"></script>
+</body>
+</html>
