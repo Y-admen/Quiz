@@ -91,6 +91,7 @@ document.getElementById('logout-btn').addEventListener('click', () => {
     signupPage.style.display = 'block';
 });
 
+
 // Timer settings
 let quizDuration = 300; // 5 minutes = 300 seconds
 let timerInterval;
