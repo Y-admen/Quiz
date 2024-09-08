@@ -73,9 +73,6 @@ margin:20px;
 }
 
 
-
-
-
 .quiz-questions {
     text-align: left;
     margin-top: 20px;
@@ -90,7 +87,8 @@ margin:20px;
     align-items: center;
     text-align: center;
     margin: 20px;
-    height: 90%;
+    height: 420px;
+    border-radius: 10px;
     
 
 }

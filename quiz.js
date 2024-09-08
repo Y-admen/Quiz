@@ -167,7 +167,7 @@ function loadQuestion(index) {
     `).join('');
     document.getElementById('options-container').innerHTML = options;
 
-    // تفعيل زر "السابق" إذا لم تكن هذه أول سؤال
+// Activate the "Previous" button if this is not the first question
     document.getElementById('prev-btn').disabled = index === 0;
 }
 
