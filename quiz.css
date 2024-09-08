@@ -96,8 +96,8 @@ button {
     align-items: center;
     text-align: center;
     margin: 20px;
-    height: 100%;
-    border-radius: 10%;
+    height: 420px;
+    border-radius: 20px;
 }
 
 #user-image-input {
@@ -164,6 +164,7 @@ button {
 
 .quiz-buttons button {
     width: 100px;
+    
 }
 
 .timer {

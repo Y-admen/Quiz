@@ -211,6 +211,12 @@ function endQuiz() {
     document.getElementById('result-message').textContent = `Your Score: ${score} / ${totalQuestions}`;
 }
 
+document.getElementById('logout-btn').addEventListener('click', () => {
+    quizPage.style.display = 'none';
+    loginPage.style.display = 'block';
+});
+
+
 // Timer settings
 let timerInterval;
 
