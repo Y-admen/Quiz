@@ -251,4 +251,3 @@ function updateFlaggedList() {
 document.getElementById('submit-btn').addEventListener('click', () => {
     endQuiz();
 });
-
