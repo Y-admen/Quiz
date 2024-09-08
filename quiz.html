@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz App</title>
     <link rel="stylesheet" href="quiz.css">
 </head>
+
 <body>
     <!-- Sign Up Page -->
     <div id="signup-page" class="page">
@@ -15,6 +17,7 @@
             <input type="text" id="last-name" placeholder="Last Name" required><br>
             <input type="email" id="signup-email" placeholder="Email" required><br>
             <input type="password" id="signup-password" placeholder="Password" required><br>
+            <input type="file" id="user-image-input" accept="image/*" required><br>
             <button type="submit">Sign Up</button>
         </form>
     </div>
@@ -40,11 +43,11 @@
         <div class="quiz-container">
             <!-- Left section for questions -->
             <div class="quiz-questions">
-                <div id="question-text"></div> <!-- View question -->
-                <div id="options-container"></div> <!-- Show options -->
+                <div id="question-text"></div> <!-- عرض السؤال -->
+                <div id="options-container"></div> <!-- عرض الخيارات -->
                 
                 <div class="quiz-buttons">
-                    <button id="prev-btn" disabled>Previous</button> <!-- "Previous" button -->
+                    <button id="prev-btn" disabled>Previous</button> <!-- زر "السابق" -->
                     <button id="flag-btn">Flag Question</button>
                     <button id="next-btn">Next</button>
                 </div>
@@ -78,4 +81,5 @@
 
     <script src="quiz.js"></script>
 </body>
+
 </html>

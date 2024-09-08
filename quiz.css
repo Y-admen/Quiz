@@ -19,7 +19,7 @@ body {
 }
 
 input {
-    margin: 10px 20px;
+    margin: 5px 5px;
     padding: 10px;
     width: 30%;
     border-radius: 10px;
@@ -31,7 +31,7 @@ button {
     margin-top: 10px;
     cursor: pointer;
     border-radius: 10px;
-    margin-left: 90px;
+    margin-left: 30px;
     border-width: 1px;
     background-color: #4a56a4;
     color: rgb(255, 255, 255);
@@ -43,14 +43,13 @@ button {
     gap: 20px;
 }
 
-#quiz-start-page h2  {
-text-align: center;
-margin-top: 150px;
-
+#quiz-start-page h2 {
+    text-align: center;
+    margin-top: 150px;
 }
 
 #start-quiz-btn {
- margin-left: 320px;
+    margin-left: 320px;
 }
 
 
@@ -61,47 +60,79 @@ margin-top: 150px;
 }
 
 #question-text {
-
-margin:20px;
-
+    margin: 20px;
+    font-size: 30px;
 }
 
-#options-container{
-
-    margin-right: 300px;
+#options-container {
+    margin-right: 5px;
     text-align: start;
+    margin-top: 10px;
 }
 
+#options-container input {
+    width: 30px;
+    margin: 10px;
+    high: 30px;
+}
 
+<<<<<<< HEAD
+=======
+#options-container label {
+    font-size: 20px;
+    margin-bottom: 10%;
+    padding: 10px;
+}
+
+>>>>>>> b4a934cacd0fbfa86bfe2ac4f09f20f90321e48b
 .quiz-questions {
     text-align: left;
-    margin-top: 20px;
-   
+    margin-top: 50px;
+    margin-left: 30px;
 }
 
 .quiz-info {
-   background: #202857;
-   color: white;
+    background: #202857;
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     margin: 20px;
+<<<<<<< HEAD
     height: 420px;
     border-radius: 10px;
     
 
+=======
+    height: 100%;
+    border-radius: 10%;
+>>>>>>> b4a934cacd0fbfa86bfe2ac4f09f20f90321e48b
 }
 
-#logout-btn{
-
-     margin-left: 15px;
+#user-image-input {
+    margin: 5px 5px;
+    padding: 10px;
+    width: 30%;
+    border-radius: 10px;
+    border-style: double;
 }
 
-#submit-btn{
-    margin-left:10px;
+#user-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-top: 20px;
+    object-fit: cover;
 }
 
+#logout-btn {
+    margin-left: 15px;
+}
+
+#submit-btn {
+    margin-left: 10px;
+}
 
 #user-image {
     width: 50px;
@@ -125,10 +156,13 @@ margin:20px;
 }
 
 .quiz-buttons {
-    margin-bottom: 20px;
-    margin-right: 10%;
-   
-    
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.quiz-buttons button {
+    width: 100px;
 }
 
 .timer {
@@ -151,4 +185,3 @@ margin:20px;
     margin-top: 10px;
     padding: 10px 20px;
 }
-
