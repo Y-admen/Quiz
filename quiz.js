@@ -2,11 +2,42 @@ const signupPage = document.getElementById('signup-page');
 const loginPage = document.getElementById('login-page');
 const quizStartPage = document.getElementById('quiz-start-page');
 const quizPage = document.getElementById('quiz-page');
+const logoutBtn = document.getElementById('logout-btn');
 
 // Forms
 const signupForm = document.getElementById('signup-form');
 const loginForm = document.getElementById('login-form');
 
+logoutBtn.addEventListener('click', () => {
+    // Reset user data
+    userData = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: ''
+    };
+
+    // Reset quiz state
+    currentQuestion = 0;
+    score = 0;
+    clearInterval(timerInterval);
+
+    // Hide all pages
+    quizPage.style.display = 'none';
+    loginPage.style.display = 'none';
+    quizStartPage.style.display = 'none';
+    document.getElementById('result-page').style.display = 'none';
+
+    // Show signup page
+    signupPage.style.display = 'block';
+
+    // Clear form inputs
+    document.getElementById('first-name').value = '';
+    document.getElementById('last-name').value = '';
+    document.getElementById('signup-email').value = '';
+    document.getElementById('signup-password').value = '';
+    document.getElementById('user-image-input').value = '';
+});
 // User data
 let userData = {
     firstName: '',
@@ -292,24 +323,21 @@ function updateFlaggedList() {
 // Update flagged questions list
 function updateFlaggedList() {
     const flaggedList = document.getElementById('flagged-list');
-    const returnFlaggedBtn = document.getElementById('return-flagged-btn');
-
     flaggedList.innerHTML = '';
-
-    if (flaggedQuestions.length === 0) {
-        returnFlaggedBtn.style.display = 'none';
-    } else {
-        returnFlaggedBtn.style.display = 'block';
-        flaggedQuestions.forEach(questionIndex => {
-            const listItem = document.createElement('li');
-            listItem.textContent = `Question ${questionIndex + 1}`;
-            listItem.addEventListener('click', () => {
-                currentQuestion = questionIndex;
-                loadQuestion(currentQuestion);
-            });
-            flaggedList.appendChild(listItem);
+    flaggedQuestions.forEach(questionIndex => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `Question ${questionIndex + 1}`;
+        listItem.addEventListener('click', () => {
+            currentQuestion = questionIndex;
+            loadQuestion(currentQuestion);
+            // Ensure the quiz page is visible
+            document.getElementById('quiz-page').style.display = 'block';
+            // Hide other pages if necessary
+            document.getElementById('quiz-start-page').style.display = 'none';
+            document.getElementById('result-page').style.display = 'none';
         });
-    }
+        flaggedList.appendChild(listItem);
+    });
 }
 
 // Handle quiz submit
