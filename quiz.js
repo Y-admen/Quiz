@@ -22,6 +22,12 @@ signupForm.addEventListener('submit', (e) => {
     userData.lastName = document.getElementById('last-name').value;
     userData.email = document.getElementById('signup-email').value;
     userData.password = document.getElementById('signup-password').value;
+
+    const imageFile = document.getElementById('user-image-input').files[0];
+    if (imageFile) {
+        userData.imageUrl = URL.createObjectURL(imageFile);
+    }
+
     signupPage.style.display = 'none';
     loginPage.style.display = 'block';
 });
@@ -31,7 +37,7 @@ loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
-    
+
     if (email === userData.email && password === userData.password) {
         loginPage.style.display = 'none';
         quizStartPage.style.display = 'block';
@@ -45,6 +51,7 @@ document.getElementById('start-quiz-btn').addEventListener('click', () => {
     quizStartPage.style.display = 'none';
     quizPage.style.display = 'block';
     document.getElementById('user-name').textContent = `${userData.firstName} ${userData.lastName}`;
+    document.getElementById('user-image').src = userData.imageUrl || 'SignUp.png';
     startTimer(600); // 10-minute timer
     loadQuestion(currentQuestion);
 });
@@ -54,8 +61,7 @@ let score = 0;
 const totalQuestions = 20;
 
 // Questions and answers
-const questions = [
-    {
+const questions = [{
         question: "1. What is the primary goal of AI?",
         options: ["A) To mimic human intelligence", "B) To replace human intelligence", "C) To enhance human capabilities", "D) To eliminate human intelligence"],
         answer: "A"
