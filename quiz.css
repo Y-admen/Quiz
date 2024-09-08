@@ -76,15 +76,12 @@ button {
     high: 30px;
 }
 
-<<<<<<< HEAD
-=======
 #options-container label {
     font-size: 20px;
     margin-bottom: 10%;
     padding: 10px;
 }
 
->>>>>>> b4a934cacd0fbfa86bfe2ac4f09f20f90321e48b
 .quiz-questions {
     text-align: left;
     margin-top: 50px;
@@ -99,15 +96,8 @@ button {
     align-items: center;
     text-align: center;
     margin: 20px;
-<<<<<<< HEAD
-    height: 420px;
-    border-radius: 10px;
-    
-
-=======
     height: 100%;
     border-radius: 10%;
->>>>>>> b4a934cacd0fbfa86bfe2ac4f09f20f90321e48b
 }
 
 #user-image-input {
@@ -146,6 +136,17 @@ button {
     margin-top: 20px;
 }
 
+.flagged-questions li {
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: #4a56a4;
+    text-decoration: underline;
+}
+
+.flagged-questions li:hover {
+    color: #a3abd6;
+}
+
 .flagged-questions ul {
     list-style-type: none;
     padding: 0;
@@ -172,9 +173,27 @@ button {
     font-weight: bold;
 }
 
-#time-out-page img {
-    width: 100px;
-    height: 100px;
+.time-out-background {
+    background-image: url('time-out.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.time-out-background h2 {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 24px;
 }
 
 #result-page {

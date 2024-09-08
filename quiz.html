@@ -43,11 +43,14 @@
         <div class="quiz-container">
             <!-- Left section for questions -->
             <div class="quiz-questions">
-                <div id="question-text"></div> <!-- عرض السؤال -->
-                <div id="options-container"></div> <!-- عرض الخيارات -->
-                
+                <div id="question-text"></div>
+                <!-- عرض السؤال -->
+                <div id="options-container"></div>
+                <!-- عرض الخيارات -->
+
                 <div class="quiz-buttons">
-                    <button id="prev-btn" disabled>Previous</button> <!-- زر "السابق" -->
+                    <button id="prev-btn" disabled>Previous</button>
+                    <!-- زر "السابق" -->
                     <button id="flag-btn">Flag Question</button>
                     <button id="next-btn">Next</button>
                 </div>
@@ -61,7 +64,9 @@
                 <div class="timer" id="timer-display">Time Left: 10:00</div>
                 <div class="flagged-questions">
                     <h3>Flagged Questions</h3>
-                    <ul id="flagged-list"></ul>
+                    <ul id="flagged-list">
+                        <button id="return-flagged-btn"></button>
+                    </ul>
                 </div>
                 <button id="submit-btn">Submit </button>
             </div>
@@ -69,10 +74,10 @@
     </div>
 
     <!-- Time Out Page -->
-    <div id="time-out-page" class="page" style="display: none;">
+    <div class="time-out-background" style="display: none;">
         <h2>Sorry, your time is out!</h2>
-        <img src="time-out.jpg" alt="Time Out">
     </div>
+
 
     <!-- Score Page -->
     <div id="result-page" class="page" style="display: none;">

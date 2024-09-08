@@ -173,7 +173,7 @@ function loadQuestion(index) {
     `).join('');
     document.getElementById('options-container').innerHTML = options;
 
-// Activate the "Previous" button if this is not the first question
+    // Activate the "Previous" button if this is not the first question
     document.getElementById('prev-btn').disabled = index === 0;
 }
 
@@ -235,6 +235,7 @@ function startTimer(duration) {
 // Flagged questions list
 const flaggedQuestions = [];
 
+// Flag button event listener
 document.getElementById('flag-btn').addEventListener('click', () => {
     if (!flaggedQuestions.includes(currentQuestion)) {
         flaggedQuestions.push(currentQuestion);
@@ -249,11 +250,71 @@ function updateFlaggedList() {
     flaggedQuestions.forEach(questionIndex => {
         const listItem = document.createElement('li');
         listItem.textContent = `Question ${questionIndex + 1}`;
+        listItem.addEventListener('click', () => {
+            currentQuestion = questionIndex;
+            loadQuestion(currentQuestion);
+        });
         flaggedList.appendChild(listItem);
     });
+}
+
+// Return to flagged questions
+const returnFlaggedBtn = document.getElementById('return-flagged-btn');
+
+function returnToFlaggedQuestions() {
+    if (flaggedQuestions.length > 0) {
+        currentQuestion = flaggedQuestions[0];
+        loadQuestion(currentQuestion);
+        flaggedQuestions.shift();
+        updateFlaggedList();
+    } else {
+        alert('No flagged questions remaining.');
+    }
+}
+
+returnFlaggedBtn.addEventListener('click', returnToFlaggedQuestions);
+
+
+function updateFlaggedList() {
+    const flaggedList = document.getElementById('flagged-list');
+    flaggedList.innerHTML = '';
+    flaggedQuestions.forEach(questionIndex => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `Question ${questionIndex + 1}`;
+        listItem.addEventListener('click', () => {
+            currentQuestion = questionIndex;
+            loadQuestion(currentQuestion);
+        });
+        flaggedList.appendChild(listItem);
+    });
+}
+
+// Update flagged questions list
+function updateFlaggedList() {
+    const flaggedList = document.getElementById('flagged-list');
+    const returnFlaggedBtn = document.getElementById('return-flagged-btn');
+
+    flaggedList.innerHTML = '';
+
+    if (flaggedQuestions.length === 0) {
+        returnFlaggedBtn.style.display = 'none';
+    } else {
+        returnFlaggedBtn.style.display = 'block';
+        flaggedQuestions.forEach(questionIndex => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `Question ${questionIndex + 1}`;
+            listItem.addEventListener('click', () => {
+                currentQuestion = questionIndex;
+                loadQuestion(currentQuestion);
+            });
+            flaggedList.appendChild(listItem);
+        });
+    }
 }
 
 // Handle quiz submit
 document.getElementById('submit-btn').addEventListener('click', () => {
     endQuiz();
 });
+
+returnFlaggedBtn.addEventListener('click', returnToFlaggedQuestions);
