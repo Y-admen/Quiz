@@ -20,6 +20,9 @@
             <input type="file" id="user-image-input" accept="image/*" required><br>
             <button type="submit">Sign Up</button>
         </form>
+
+        <p>Already have an account? <a href="#" id="go-to-login">Login</a></p> 
+        
     </div>
 
     <!-- Login Page -->
@@ -29,6 +32,9 @@
             <input type="email" id="login-email" placeholder="Email" required><br>
             <input type="password" id="login-password" placeholder="Password" required><br>
             <button type="submit">Login</button>
+
+            <p>Don't have an account? <a href="#" id="go-to-signup">Sign Up</a></p> 
+
         </form>
     </div>
 
@@ -73,10 +79,17 @@
         </div>
     </div>
 
+
+
     <!-- Time Out Page -->
-    <div class="time-out-background" style="display: none;">
-        <h2>Sorry, your time is out!</h2>
-    </div>
+<div id="time-out-page" class="page" style="display: none;">
+    <h2>Time's Up!</h2>
+    <p>Your time has run out.</p>
+    <button id="go-to-score-btn">View Score</button>
+<div>
+    <img src="time-out.jpg"  id="time-out-img"  time out/> 
+</div>
+</div>
 
 
     <!-- Score Page -->

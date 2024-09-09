@@ -8,36 +8,6 @@ const logoutBtn = document.getElementById('logout-btn');
 const signupForm = document.getElementById('signup-form');
 const loginForm = document.getElementById('login-form');
 
-logoutBtn.addEventListener('click', () => {
-    // Reset user data
-    userData = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''
-    };
-
-    // Reset quiz state
-    currentQuestion = 0;
-    score = 0;
-    clearInterval(timerInterval);
-
-    // Hide all pages
-    quizPage.style.display = 'none';
-    loginPage.style.display = 'none';
-    quizStartPage.style.display = 'none';
-    document.getElementById('result-page').style.display = 'none';
-
-    // Show signup page
-    signupPage.style.display = 'block';
-
-    // Clear form inputs
-    document.getElementById('first-name').value = '';
-    document.getElementById('last-name').value = '';
-    document.getElementById('signup-email').value = '';
-    document.getElementById('signup-password').value = '';
-    document.getElementById('user-image-input').value = '';
-});
 // User data
 let userData = {
     firstName: '',
@@ -45,6 +15,27 @@ let userData = {
     email: '',
     password: ''
 };
+
+// Reset the application state on logout
+logoutBtn.addEventListener('click', () => {
+    userData = { firstName: '', lastName: '', email: '', password: '' };
+    currentQuestion = 0;
+    score = 0;
+    clearInterval(timerInterval);
+
+    quizPage.style.display = 'none';
+    loginPage.style.display = 'none';
+    quizStartPage.style.display = 'none';
+    document.getElementById('result-page').style.display = 'none';
+    document.getElementById('time-out-page').style.display = 'none'; // إخفاء صفحة انتهاء الوقت
+    signupPage.style.display = 'block';
+
+    document.getElementById('first-name').value = '';
+    document.getElementById('last-name').value = '';
+    document.getElementById('signup-email').value = '';
+    document.getElementById('signup-password').value = '';
+    document.getElementById('user-image-input').value = '';
+});
 
 // Signup event
 signupForm.addEventListener('submit', (e) => {
@@ -77,6 +68,18 @@ loginForm.addEventListener('submit', (e) => {
     }
 });
 
+// Move from login page to registration page
+document.getElementById('go-to-signup').addEventListener('click', () => {
+    loginPage.style.display = 'none';
+    signupPage.style.display = 'block';
+});
+
+// Move from the registration page to the login page
+document.getElementById('go-to-login').addEventListener('click', () => {
+    signupPage.style.display = 'none';
+    loginPage.style.display = 'block';
+});
+
 // Start quiz
 document.getElementById('start-quiz-btn').addEventListener('click', () => {
     quizStartPage.style.display = 'none';
@@ -90,9 +93,11 @@ document.getElementById('start-quiz-btn').addEventListener('click', () => {
 let currentQuestion = 0;
 let score = 0;
 const totalQuestions = 20;
+let answers = new Array(totalQuestions).fill(null); // مصفوفة لحفظ الإجابات
 
 // Questions and answers
-const questions = [{
+const questions = [
+    {
         question: "1. What is the primary goal of AI?",
         options: ["A) To mimic human intelligence", "B) To replace human intelligence", "C) To enhance human capabilities", "D) To eliminate human intelligence"],
         answer: "A"
@@ -193,27 +198,26 @@ const questions = [{
         answer: "A"
     }
 ];
-
-// Load question
+// Load question and retain selected answer
 function loadQuestion(index) {
     const question = questions[index];
     document.getElementById('question-text').textContent = question.question;
     const options = question.options.map((option, i) => `
-        <input type="radio" name="option" id="option${i}" value="${option.charAt(0)}">
+        <input type="radio" name="option" id="option${i}" value="${option.charAt(0)}" ${answers[index] === option.charAt(0) ? 'checked' : ''}>
         <label for="option${i}">${option}</label><br>
     `).join('');
     document.getElementById('options-container').innerHTML = options;
 
-    // Activate the "Previous" button if this is not the first question
     document.getElementById('prev-btn').disabled = index === 0;
 }
 
-// Navigate to next question
+// Navigate to next question and store answer
 document.getElementById('next-btn').addEventListener('click', () => {
     const selectedOption = document.querySelector('input[name="option"]:checked');
     if (selectedOption) {
-        const selectedAnswer = selectedOption.value;
-        if (selectedAnswer === questions[currentQuestion].answer) {
+        answers[currentQuestion] = selectedOption.value;
+
+        if (selectedOption.value === questions[currentQuestion].answer) {
             score++;
         }
         currentQuestion++;
@@ -235,18 +239,12 @@ document.getElementById('prev-btn').addEventListener('click', () => {
     }
 });
 
-// End quiz and show the result
+// End quiz and show result
 function endQuiz() {
     quizPage.style.display = 'none';
     document.getElementById('result-page').style.display = 'block';
     document.getElementById('result-message').textContent = `Your Score: ${score} / ${totalQuestions}`;
 }
-
-document.getElementById('logout-btn').addEventListener('click', () => {
-    quizPage.style.display = 'none';
-    loginPage.style.display = 'block';
-});
-
 
 // Timer settings
 let timerInterval;
@@ -262,12 +260,24 @@ function startTimer(duration) {
 
         if (timeRemaining <= 0) {
             clearInterval(timerInterval);
-            endQuiz(); // End quiz when time is out
+            showTimeOutPage(); // عرض صفحة انتهاء الوقت
         }
         timeRemaining--;
-    }, 1000);
+    }, 10);
 }
 
+// Show time-out page when time is up
+function showTimeOutPage() {
+    quizPage.style.display = 'none'; // إخفاء صفحة الاختبار
+    document.getElementById('time-out-page').style.display = 'block'; // عرض صفحة انتهاء الوقت
+}
+
+// الانتقال إلى صفحة النتيجة بعد انتهاء الوقت
+document.getElementById('go-to-score-btn').addEventListener('click', () => {
+    document.getElementById('time-out-page').style.display = 'none'; // إخفاء صفحة انتهاء الوقت
+    document.getElementById('result-page').style.display = 'block';  // عرض صفحة النتيجة
+    document.getElementById('result-message').textContent = `Your Score: ${score} / ${totalQuestions}`;
+});
 
 // Flagged questions list
 const flaggedQuestions = [];
@@ -290,6 +300,9 @@ function updateFlaggedList() {
         listItem.addEventListener('click', () => {
             currentQuestion = questionIndex;
             loadQuestion(currentQuestion);
+            quizPage.style.display = 'block';
+            quizStartPage.style.display = 'none';
+            document.getElementById('result-page').style.display = 'none';
         });
         flaggedList.appendChild(listItem);
     });
@@ -311,44 +324,7 @@ function returnToFlaggedQuestions() {
 
 returnFlaggedBtn.addEventListener('click', returnToFlaggedQuestions);
 
-
-function updateFlaggedList() {
-    const flaggedList = document.getElementById('flagged-list');
-    flaggedList.innerHTML = '';
-    flaggedQuestions.forEach(questionIndex => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `Question ${questionIndex + 1}`;
-        listItem.addEventListener('click', () => {
-            currentQuestion = questionIndex;
-            loadQuestion(currentQuestion);
-        });
-        flaggedList.appendChild(listItem);
-    });
-}
-
-// Update flagged questions list
-function updateFlaggedList() {
-    const flaggedList = document.getElementById('flagged-list');
-    flaggedList.innerHTML = '';
-    flaggedQuestions.forEach(questionIndex => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `Question ${questionIndex + 1}`;
-        listItem.addEventListener('click', () => {
-            currentQuestion = questionIndex;
-            loadQuestion(currentQuestion);
-            // Ensure the quiz page is visible
-            document.getElementById('quiz-page').style.display = 'block';
-            // Hide other pages if necessary
-            document.getElementById('quiz-start-page').style.display = 'none';
-            document.getElementById('result-page').style.display = 'none';
-        });
-        flaggedList.appendChild(listItem);
-    });
-}
-
 // Handle quiz submit
 document.getElementById('submit-btn').addEventListener('click', () => {
     endQuiz();
 });
-
-returnFlaggedBtn.addEventListener('click', returnToFlaggedQuestions);
